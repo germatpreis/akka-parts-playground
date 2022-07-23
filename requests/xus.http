@@ -1,0 +1,20 @@
+GRPC localhost:8101/xus.XusService/ProcessLocalUpdateSet
+
+{
+  "localUpdateSets": [
+    {
+      "snowCompanyId": "xtype",
+      "snowInstanceId": "xtype_dev",
+      "sysId": "111",
+      "state": "completed",
+      "deleted": false
+    },
+    {
+      "snowCompanyId": "xtype",
+      "snowInstanceId": "xtype_dev",
+      "sysId": "222",
+      "state": "completed",
+      "deleted": false
+    }
+  ]
+}
