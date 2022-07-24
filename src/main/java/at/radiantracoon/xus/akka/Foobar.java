@@ -9,8 +9,8 @@ import at.radiantracoon.xus.akka.http.XusServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Main {
-    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+public class Foobar {
+    private static final Logger logger = LoggerFactory.getLogger(Foobar.class);
 
     public static void main(String[] args) {
         var system = ActorSystem.<Void>create(Behaviors.empty(), "XusService");
