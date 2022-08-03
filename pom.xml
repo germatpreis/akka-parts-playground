@@ -41,7 +41,7 @@
             <dependency>
                 <groupId>org.springframework.data</groupId>
                 <artifactId>spring-data-bom</artifactId>
-                <version>2020.0.1</version>
+                <version>2021.2.0</version>
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
@@ -199,7 +199,7 @@
                         <argument>-Dconfig.resource=${APP_CONFIG}</argument>
                         <argument>-classpath</argument>
                         <classpath />
-                        <argument>at.radiantracoon.xus.akka.Foobar</argument>
+                        <argument>at.radiantracoon.parts.akka.MainFoobar</argument>
                     </arguments>
                 </configuration>
             </plugin>

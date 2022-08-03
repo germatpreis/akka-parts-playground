@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option java_package = "at.radiantracoon.parts.akka.proto";
+
+package parts;
+
+service PartsService {
+  rpc ReceivePart(ReceivePartRequest) returns (ReceivePartResponse) {}
+}
+
+message ReceivePartRequest {
+  PartId partId = 1;
+  string partName = 2;
+  double partWeight = 3;
+  repeated PartId references = 4;
+}
+
+message ReceivePartResponse {
+  string timestamp = 1;
+}
+
+message PartId {
+  string id = 1;
+}
