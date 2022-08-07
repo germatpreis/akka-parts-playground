@@ -1,0 +1,12 @@
+###
+GRPC localhost:8101/parts.PartsService/ReceivePart
+
+{
+  "partId": "logical-part-id-8",
+  "partName": "a cool part 5",
+  "partWeight": 4,
+  "references": [
+    "referenced-part-id-3",
+    "referenced-part-id-4"
+  ]
+}

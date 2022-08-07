@@ -4,6 +4,9 @@ import akka.actor.typed.ActorSystem;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.management.cluster.bootstrap.ClusterBootstrap;
 import akka.management.javadsl.AkkaManagement;
+import at.radiantracoon.parts.akka.parts.PartsAggregate;
+import at.radiantracoon.parts.akka.parts.PartsServer;
+import at.radiantracoon.parts.akka.parts.PartsServiceImpl;
 import at.radiantracoon.parts.akka.repository.DeviceRepository;
 import at.radiantracoon.parts.akka.repository.SpringIntegration;
 import org.slf4j.Logger;
@@ -29,6 +32,7 @@ public class MainFoobar {
         ClusterBootstrap.get(system).start();
 
         // akka persistence
+        PartsAggregate.init(system);
 
         // projection
         var springContext = SpringIntegration.applicationContext(system);

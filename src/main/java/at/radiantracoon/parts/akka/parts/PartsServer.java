@@ -1,4 +1,4 @@
-package at.radiantracoon.parts.akka;
+package at.radiantracoon.parts.akka.parts;
 
 import akka.actor.typed.ActorSystem;
 import akka.grpc.javadsl.ServerReflection;

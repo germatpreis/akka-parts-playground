@@ -9,16 +9,12 @@ service PartsService {
 }
 
 message ReceivePartRequest {
-  PartId partId = 1;
+  string partId = 1;
   string partName = 2;
   double partWeight = 3;
-  repeated PartId references = 4;
+  repeated string references = 4;
 }
 
 message ReceivePartResponse {
   string timestamp = 1;
-}
-
-message PartId {
-  string id = 1;
 }
