@@ -25,6 +25,16 @@ public interface Event extends CborSerializable {
         }
     }
 
+    final class FirstPartOfDeviceReceived extends BaseEvent {
+        final String name;
+        final double weight;
+        public FirstPartOfDeviceReceived(String partId, String name, double weight) {
+            super(partId);
+            this.name = name;
+            this.weight = weight;
+        }
+    }
+
     final class PartWeightChanged extends BaseEvent {
         final double oldWeight;
         final double newWeight;

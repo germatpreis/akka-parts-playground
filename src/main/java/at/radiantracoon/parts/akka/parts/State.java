@@ -5,6 +5,7 @@ import at.radiantracoon.parts.akka.CborSerializable;
 
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -48,5 +49,9 @@ final class State implements CborSerializable {
     public State mergeReferences(Set<String> references) {
         references.forEach(r -> this.references.putIfAbsent(new PartId(r), null));
         return this;
+    }
+
+    public boolean noMaterializedReferences() {
+        return references.isEmpty();
     }
 }

@@ -4,9 +4,11 @@ import akka.actor.typed.ActorSystem;
 import akka.actor.typed.javadsl.Behaviors;
 import akka.management.cluster.bootstrap.ClusterBootstrap;
 import akka.management.javadsl.AkkaManagement;
+import at.radiantracoon.parts.akka.devices.DeviceAggregate;
 import at.radiantracoon.parts.akka.parts.PartsAggregate;
 import at.radiantracoon.parts.akka.parts.PartsServer;
 import at.radiantracoon.parts.akka.parts.PartsServiceImpl;
+import at.radiantracoon.parts.akka.parts.PublishEventsProjection;
 import at.radiantracoon.parts.akka.repository.DeviceRepository;
 import at.radiantracoon.parts.akka.repository.SpringIntegration;
 import org.slf4j.Logger;
@@ -33,11 +35,15 @@ public class MainFoobar {
 
         // akka persistence
         PartsAggregate.init(system);
+        DeviceAggregate.init(system);
 
-        // projection
+        // projection (database)
         var springContext = SpringIntegration.applicationContext(system);
         var repository = springContext.getBean(DeviceRepository.class);
         var txManager = springContext.getBean(JpaTransactionManager.class);
+
+        // projection (trigger other aggregates)
+        PublishEventsProjection.create(system, txManager);
 
         // grpc
         var config = system.settings().config();

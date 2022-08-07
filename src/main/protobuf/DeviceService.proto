@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "at.radiantracoon.device.akka.proto";
+
+package device;
+
+message CreateDevice {
+  string deviceId = 1;
+  string createPartId = 2;
+}

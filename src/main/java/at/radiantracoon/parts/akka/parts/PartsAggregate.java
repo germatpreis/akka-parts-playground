@@ -18,13 +18,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 public class PartsAggregate extends EventSourcedBehaviorWithEnforcedReplies<Command, Event, State> {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     static final EntityTypeKey<Command> ENTITY_KEY = EntityTypeKey.create(Command.class, "Part");
 
-    private static final List<String> TAGS = List.of("parts-0", "parts-1", "parts-2", "parts-3", "parts-4");
+    static final List<String> TAGS = List.of("parts-0", "parts-1", "parts-2", "parts-3", "parts-4");
 
     public static void init(ActorSystem<?> system) {
         ClusterSharding.get(system)
@@ -105,6 +106,10 @@ public class PartsAggregate extends EventSourcedBehaviorWithEnforcedReplies<Comm
             events.add(new Event.PartReferencesChanged(partId, state.getReferencesAsStringSet(), cmd.references()));
         }
 
+        if (state.noMaterializedReferences()) {
+            events.add(new Event.FirstPartOfDeviceReceived(partId, cmd.name(), cmd.weight()));
+        }
+
         return Effect()
                 .persist(events)
                 .thenReply(cmd.replyTo(), updatedState -> StatusReply.success(updatedState.getStateSummary()));
@@ -117,6 +122,10 @@ public class PartsAggregate extends EventSourcedBehaviorWithEnforcedReplies<Comm
                 .onEvent(Event.PartReceived.class, (state, evt) -> {
                     logger.info("Received Event.PartReceived");
                     return state.integrate(evt.name, evt.weight, evt.references);
+                })
+                .onEvent(Event.FirstPartOfDeviceReceived.class, (state, evt) -> {
+                    logger.info("Received Event.FirstPartOfDeviceReceived");
+                    return state;
                 })
                 .onEvent(Event.PartNameChanged.class, (state, evt) -> {
                     logger.info("Received Event.PartNameChanged");
@@ -131,5 +140,10 @@ public class PartsAggregate extends EventSourcedBehaviorWithEnforcedReplies<Comm
                     return state;
                 })
                 .build();
+    }
+
+    @Override
+    public Set<String> tagsFor(Event event) {
+        return Set.of(projectionTag);
     }
 }
