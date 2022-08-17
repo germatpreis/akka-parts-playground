@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>at.radiantracoon</groupId>
-    <artifactId>akka-iot-sample-again</artifactId>
+    <groupId>parts.akka</groupId>
+    <artifactId>akka-parts-playground</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>akka-persistence-own-java</name>
+    <name>akka-parts-playground</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -199,7 +199,7 @@
                         <argument>-Dconfig.resource=${APP_CONFIG}</argument>
                         <argument>-classpath</argument>
                         <classpath />
-                        <argument>at.radiantracoon.parts.akka.Main</argument>
+                        <argument>parts.akka.Main</argument>
                     </arguments>
                 </configuration>
             </plugin>
