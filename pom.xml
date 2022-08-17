@@ -199,7 +199,7 @@
                         <argument>-Dconfig.resource=${APP_CONFIG}</argument>
                         <argument>-classpath</argument>
                         <classpath />
-                        <argument>at.radiantracoon.parts.akka.MainFoobar</argument>
+                        <argument>at.radiantracoon.parts.akka.Main</argument>
                     </arguments>
                 </configuration>
             </plugin>

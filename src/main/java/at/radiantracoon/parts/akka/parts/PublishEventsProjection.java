@@ -3,16 +3,16 @@ package at.radiantracoon.parts.akka.parts;
 import akka.actor.typed.ActorSystem;
 import akka.cluster.sharding.typed.javadsl.ShardedDaemonProcess;
 import akka.persistence.jdbc.query.javadsl.JdbcReadJournal;
+import akka.persistence.query.Offset;
 import akka.projection.ProjectionBehavior;
 import akka.projection.ProjectionId;
+import akka.projection.eventsourced.EventEnvelope;
 import akka.projection.eventsourced.javadsl.EventSourcedProvider;
 import akka.projection.javadsl.AtLeastOnceProjection;
 import akka.projection.javadsl.SourceProvider;
 import akka.projection.jdbc.javadsl.JdbcProjection;
 import at.radiantracoon.parts.akka.repository.HibernateJdbcSession;
 import org.springframework.orm.jpa.JpaTransactionManager;
-import akka.persistence.query.Offset;
-import akka.projection.eventsourced.EventEnvelope;
 
 public class PublishEventsProjection {
 

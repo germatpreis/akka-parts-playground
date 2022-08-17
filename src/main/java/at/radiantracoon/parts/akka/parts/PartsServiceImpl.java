@@ -5,7 +5,6 @@ import akka.cluster.sharding.typed.javadsl.ClusterSharding;
 import akka.grpc.GrpcServiceException;
 import at.radiantracoon.parts.akka.proto.PartService;
 import at.radiantracoon.parts.akka.proto.PartsService;
-import at.radiantracoon.parts.akka.repository.DeviceRepository;
 import io.grpc.Status;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,13 +20,9 @@ public class PartsServiceImpl implements PartsService {
     private final ClusterSharding sharding;
     private final Duration timeout;
 
-    private final DeviceRepository deviceRepository;
-
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    public PartsServiceImpl(ActorSystem<?> system, DeviceRepository repository) {
-        this.deviceRepository = repository;
-
+    public PartsServiceImpl(ActorSystem<?> system) {
         sharding = ClusterSharding.get(system);
 
         this.timeout = Duration.ofSeconds(5);

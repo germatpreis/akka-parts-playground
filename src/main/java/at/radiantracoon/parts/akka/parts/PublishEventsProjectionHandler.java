@@ -6,7 +6,6 @@ import akka.cluster.sharding.typed.javadsl.ClusterSharding;
 import akka.grpc.GrpcServiceException;
 import akka.projection.eventsourced.EventEnvelope;
 import akka.projection.javadsl.Handler;
-import at.radiantracoon.device.akka.proto.CreateDevice;
 import at.radiantracoon.parts.akka.devices.Command;
 import at.radiantracoon.parts.akka.devices.DeviceAggregate;
 import at.radiantracoon.parts.akka.devices.DeviceStateSummary;

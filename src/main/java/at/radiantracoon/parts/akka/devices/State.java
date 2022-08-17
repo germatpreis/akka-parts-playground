@@ -1,6 +1,5 @@
 package at.radiantracoon.parts.akka.devices;
 
-import akka.actor.typed.ActorRef;
 import at.radiantracoon.parts.akka.CborSerializable;
 
 import java.util.HashMap;
