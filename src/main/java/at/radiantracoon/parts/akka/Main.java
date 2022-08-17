@@ -9,17 +9,16 @@ import at.radiantracoon.parts.akka.parts.PartsAggregate;
 import at.radiantracoon.parts.akka.parts.PartsServer;
 import at.radiantracoon.parts.akka.parts.PartsServiceImpl;
 import at.radiantracoon.parts.akka.parts.PublishEventsProjection;
-import at.radiantracoon.parts.akka.repository.DeviceRepository;
 import at.radiantracoon.parts.akka.repository.SpringIntegration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.orm.jpa.JpaTransactionManager;
 
-public class MainFoobar {
-    private static final Logger logger = LoggerFactory.getLogger(MainFoobar.class);
+public class Main {
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
-        var system = ActorSystem.<Void>create(Behaviors.empty(), "XusService");
+        var system = ActorSystem.<Void>create(Behaviors.empty(), "PartsService");
         try {
             init(system);
         } catch (Exception e) {
@@ -37,9 +36,8 @@ public class MainFoobar {
         PartsAggregate.init(system);
         DeviceAggregate.init(system);
 
-        // projection (database)
+        // projection (database, not yet used)
         var springContext = SpringIntegration.applicationContext(system);
-        var repository = springContext.getBean(DeviceRepository.class);
         var txManager = springContext.getBean(JpaTransactionManager.class);
 
         // projection (trigger other aggregates)
@@ -47,10 +45,10 @@ public class MainFoobar {
 
         // grpc
         var config = system.settings().config();
-        var grpcInterface = config.getString("xus-service.grpc.interface");
-        int grpcPort = config.getInt("xus-service.grpc.port");
+        var grpcInterface = config.getString("parts-service.grpc.interface");
+        int grpcPort = config.getInt("parts-service.grpc.port");
 
-        var grpcService = new PartsServiceImpl(system, repository);
+        var grpcService = new PartsServiceImpl(system);
         PartsServer.start(grpcInterface, grpcPort, system, grpcService);
     }
 

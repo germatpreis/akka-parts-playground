@@ -21,13 +21,9 @@ public class PartsServiceImpl implements PartsService {
     private final ClusterSharding sharding;
     private final Duration timeout;
 
-    private final DeviceRepository deviceRepository;
-
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    public PartsServiceImpl(ActorSystem<?> system, DeviceRepository repository) {
-        this.deviceRepository = repository;
-
+    public PartsServiceImpl(ActorSystem<?> system) {
         sharding = ClusterSharding.get(system);
 
         this.timeout = Duration.ofSeconds(5);

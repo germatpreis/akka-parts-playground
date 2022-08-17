@@ -3,20 +3,20 @@ services:
   postgres-db:
     image: postgres:latest
     ports:
-      - 5432:5432
+      - "5432:5432"
     environment:
-      POSTGRES_USER: xus
-      POSTGRES_PASSWORD: xus
+      POSTGRES_USER: parts
+      POSTGRES_PASSWORD: parts
 
   # this second PostgresSQL is used when running test
   postgres-db-test:
     image: postgres:latest
     ports:
-      - 5433:5432
+      - "5433:5432"
     environment:
-      POSTGRES_DB: xus
-      POSTGRES_USER: xus
-      POSTGRES_PASSWORD: xus
+      POSTGRES_DB: parts
+      POSTGRES_USER: parts
+      POSTGRES_PASSWORD: parts
 
 # See dockerhub for different versions of kafka and zookeeper
 # https://hub.docker.com/r/wurstmeister/kafka/
